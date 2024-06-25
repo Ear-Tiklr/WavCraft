@@ -1,4 +1,4 @@
-conda activate AudioEditor
+conda activate WavCraft
 source ./scripts/chatgpt.sh
 
 mkdir -p services_logs

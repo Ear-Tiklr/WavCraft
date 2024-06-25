@@ -232,5 +232,5 @@ dependencies:
     - websockets~=11.0.3
     - werkzeug~=3.0.1
     - zipp~=3.17.0
-prefix: /homes/jl009/.conda/envs/AudioSR
+prefix: /root/.conda/envs/AudioSR
 

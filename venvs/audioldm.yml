@@ -189,5 +189,5 @@ dependencies:
     - wcwidth==0.2.12
     - websockets==11.0.3
     - zipp==3.17.0
-prefix: /homes/jl009/.conda/envs/AudioInpainting
+prefix: /root/.conda/envs/AudioInpainting
 
