@@ -1,0 +1,5 @@
+{
+    "log_path": "/path/to/log",
+    "api_key": "your_api_key",
+    "model": "gpt-3.5-turbo"
+}
