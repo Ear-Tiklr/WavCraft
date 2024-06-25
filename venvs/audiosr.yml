@@ -88,7 +88,7 @@ dependencies:
     - attrs==23.1.0
     - audiomentations==0.34.1
     - audioread==3.0.1
-    - audiosr==0.0.6
+    - audiosr
     - babel==2.13.1
     - blinker==1.7.0
     - cffi==1.16.0
@@ -208,7 +208,7 @@ dependencies:
     - sympy==1.12
     - tabulate==0.9.0
     - threadpoolctl==3.2.0
-    - timm==0.9.10
+    - timm
     - tokenizers==0.13.3
     - tomlkit==0.12.0
     - toolz==0.12.0
