@@ -212,8 +212,8 @@ dependencies:
     - tokenizers==0.13.3
     - tomlkit==0.12.0
     - toolz==0.12.0
-    - torch==2.0.1
-    - torchaudio==2.1.0
+    - torch
+    - torchaudio
     - torchlibrosa==0.1.0
     - torchvision==0.16.0
     - tqdm==4.66.1
