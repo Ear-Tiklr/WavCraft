@@ -10,6 +10,7 @@ from retrying import retry
 from gradio_client import Client
 from audiomentations import AddGaussianSNR, LowPassFilter, HighPassFilter, ApplyImpulseResponse, RoomSimulator
 
+from utils.config_loader_json import get_config
 from wavcraft.utils import get_service_port, get_service_url, get_path_from_target_dir, generate_random_series
  
 
@@ -18,7 +19,7 @@ SAMPLE_RATE = 16000  # 32000 is NOT supported by wavmark
 
 localhost_addr = get_service_url()
 
-
+config = get_config()
 def _LOUDNESS_NORM(wav, volume=-25, out_wav=generate_random_series()+'.wav', sr=SAMPLE_RATE):
     """
     Nomalize waveform and adjust the loadness as per BS.1770.
@@ -349,6 +350,11 @@ def ROOM_SIMULATE(wav_path, min_size_x=3.6, max_size_x=5.6,
 @retry(stop_max_attempt_number=5, wait_fixed=2000)
 def AU(wav_path, text="write an audio caption describing the sound"):
     HF_key = os.environ.get("HF_KEY")
+    if(HF_key is None or HF_key == ''):
+        HF_key = config.get('HF_KEY', None)
+        if(HF_key is None or HF_key == ''):
+            raise ValueError("HF_KEY environment variable is not set")
+
     client = Client("https://yuangongfdu-ltu.hf.space/", hf_token=HF_key)
     response = client.predict(
         wav_path,

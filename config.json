@@ -1,5 +1,6 @@
 {
-    "log_path": "/path/to/log",
-    "api_key": "your_api_key",
-    "model": "gpt-3.5-turbo"
+    "log_path": "/tmp/log",
+    "api_key": "sk-proj-L5KgaJwuDwCXxOXJ5dJtT3BlbkFJs0vstrdnSbX3e8iupbnA",
+    "model": "gpt-3.5-turbo",
+    "HF_KEY": "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"
 }
