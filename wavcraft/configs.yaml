@@ -2,7 +2,7 @@ AudioCraft:
   # MusicGen 
   ttm_model_size: melody # [small, medium, large]
   # AudioGen 
-  tta_model_size: medium # [medium]
+  tta_model_size: small # [medium]
 
 Text-to-Speech:
   # Bark
@@ -13,4 +13,4 @@ Speech-Restoration:
   Enable: True
 
 AudioLDM:
-  model_size: audioldm-m-full
+  model_size: audioldm-s-full
