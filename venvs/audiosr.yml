@@ -97,7 +97,7 @@ dependencies:
     - click==8.1.7
     - clldutils==3.20.0
     - cmake==3.27.7
-    - cog==0.8.6
+    - cog==0.9.9
     - colorama==0.4.6
     - colorlog==6.7.0
     - contourpy==1.2.0
