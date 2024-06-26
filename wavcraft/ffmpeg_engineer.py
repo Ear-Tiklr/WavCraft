@@ -3,7 +3,10 @@ import os
 import time
 import glob
 import pickle
-import openai
+from openai import OpenAI
+
+client = OpenAI(api_key=api_key,
+api_key='')
 
 from utils.config_loader_json import get_config
 
@@ -43,7 +46,7 @@ class FFmpegEngineer:
             if len(filtered_object) > 0:
                 response = filtered_object[0]['response']
                 return response
-        
+
         self.history.append(
             {
                 "role": "user",
@@ -52,12 +55,9 @@ class FFmpegEngineer:
             )
 
         try:
-            openai.api_key = api_key
-            chat = openai.ChatCompletion.create(
-                model=model,  # "gpt-3.5-turbo",
-                messages=self.history,
-            )
-            response = chat['choices'][0]['message']['content']
+            chat = client.chat.completions.create(model=model,  # "gpt-3.5-turbo",
+            messages=self.history)
+            response = chat.choices[0].message.content
 
             self.history.append(
                 {
@@ -65,9 +65,8 @@ class FFmpegEngineer:
                     "content": response
                 },
                 )
-            
+
         finally:
-            openai.api_key = ''
 
         if self.use_openai_cache:
             cache_obj = {
@@ -79,7 +78,7 @@ class FFmpegEngineer:
                 self.openai_cache.append(cache_obj)
 
         return response
-    
+
 
     def reset(self,):
         self.history = []
@@ -114,7 +113,7 @@ class FFmpegEngineer:
             return self._extract_substring_with_quotes(content, quotes="```")[0]
         else:
             return content
-        
+
     def execute_code(self, content):
         os.system(content)
 

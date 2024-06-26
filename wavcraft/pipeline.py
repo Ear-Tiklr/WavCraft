@@ -1,6 +1,9 @@
 import datetime
 import os
-import openai
+from openai import OpenAI
+
+client = OpenAI(api_key=api_key,
+api_key='')
 import re
 import glob
 import pickle
@@ -41,21 +44,17 @@ def chat_with_gpt(api_key, model=config.get('model', 'gpt-3.5')):
         if len(filtered_object) > 0:
             response = filtered_object[0]['response']
             return response
-    
+
     try:
-        openai.api_key = api_key
-        
-        chat = openai.ChatCompletion.create(
-            model=model,
-            messages=chat_history,
-        )
+
+        chat = client.chat.completions.create(model=model,
+        messages=chat_history)
     finally:
-        openai.api_key = ''
 
     if USE_OPENAI_CACHE:
         cache_obj = {
             'prompt': chat_history[-1]["content"],
-            'response': chat['choices'][0]['message']['content']
+            'response': chat.choices[0].message.content
         }
         with open(f'cache/{time.time()}.pkl', 'wb') as _openai_cache:
             pickle.dump(cache_obj, _openai_cache)
@@ -63,16 +62,16 @@ def chat_with_gpt(api_key, model=config.get('model', 'gpt-3.5')):
 
     chat_history.append({
                     "role": "system",
-                    "content": chat['choices'][0]['message']['content'],
+                    "content": chat.choices[0].message.content,
                     })
 
-    return chat['choices'][0]['message']['content']
+    return chat.choices[0].message.content
 
 
 # Assuming the existence of USE_OPENAI_CACHE, chat_history, and openai_cache similar to GPT function
 def chat_with_mistral():  
     global chat_history
-    
+
     if USE_OPENAI_CACHE:
         filtered_object = list(filter(lambda x: x['prompt'] == chat_history[-1]["content"], openai_cache))
         if len(filtered_object) > 0:
@@ -85,7 +84,7 @@ def chat_with_mistral():
         response = local_llm.get_response(chat_history[-1]["content"])
     finally:
         pass  
-    
+
     if USE_OPENAI_CACHE:
         cache_obj = {
             'prompt': chat_history[-1]["content"],
@@ -121,7 +120,7 @@ def extract_substring_with_quotes(input_string, quotes="'''"):
 
 def maybe_remove_python_as_prefix(content):
     keyword = "python"
-    
+
     content = content.strip()
     if content.startswith(keyword):
         # Remove the keyword and strip leading/trailing whitespaces
@@ -227,7 +226,7 @@ def input_text_to_code(input_text, output_path, api_key, model=config.get('model
         "role": "user",
         "content": prompt,
         })
-       
+
     write_to_file(log_path, f"{chat_history}")
     code_response = _input_text_to_code_with_retry(log_path, api_key, model)
     executable_code_filename = output_path / 'audio_executable.py'
@@ -272,7 +271,7 @@ def input_text_to_code_plus(input_text, output_path, api_key, model=config.get('
         "role": "user",
         "content": prompt,
         })
-       
+
     write_to_file(log_path, f"{chat_history}")
 
     code_response = _input_text_to_code_with_retry(log_path, api_key, model)
@@ -289,18 +288,18 @@ def audio_exe_to_result(code_response, output_path):
     # TODO: make this more easy to modify
     # Executable file header
     header = "from wavcraft.apis import LEN, OUTPUT, SPLIT, MIX, CAT, ADJUST_VOL, ADD_NOISE, LOW_PASS, HIGH_PASS, ADD_RIR, ROOM_SIMULATE, TTM, TTA, TTS, SR, TSS, INPAINT"
-    
+
     input_claimer = ""
     n_input_wavs = len(glob(os.path.join(output_path, 'audio', 'input_*.wav')))
     for i in range(n_input_wavs):
         in_wav = f"\"{output_path.absolute()}/audio/input_{i}.wav\""
         input_claimer += f"INPUT_WAV{i} = {in_wav}\n"
-    
+
     tail = "OUTPUT(OUTPUT_WAV)"
     code_response = maybe_get_content_from_file(code_response)
     command = f"{header}\n\n\n{input_claimer}{code_response}\n{tail}"
     write_to_file(executable_code_filename, command)
-    
+
     os.system(f'PYTHONPATH=. python {executable_code_filename}')
 
 
