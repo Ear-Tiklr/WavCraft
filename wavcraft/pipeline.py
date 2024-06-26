@@ -2,8 +2,6 @@ import datetime
 import os
 from openai import OpenAI
 
-client = OpenAI(api_key=api_key,
-api_key='')
 import re
 import glob
 import pickle
@@ -33,7 +31,7 @@ if USE_OPENAI_CACHE:
 # Global vars
 chat_history = []
 local_llm = None
-
+client = OpenAI(api_key=config.get('api_key', os.environ.get("OPENAI_KEY")))
 
 def chat_with_gpt(api_key, model=config.get('model', 'gpt-3.5')):
     print(f'using model--->{config.get("model", "gpt-3.5")}')
@@ -46,24 +44,21 @@ def chat_with_gpt(api_key, model=config.get('model', 'gpt-3.5')):
             return response
 
     try:
-
-        chat = client.chat.completions.create(model=model,
-        messages=chat_history)
+        chat = client.chat.completions.create(model=model, messages=chat_history)
     finally:
+        if USE_OPENAI_CACHE:
+            cache_obj = {
+                'prompt': chat_history[-1]["content"],
+                'response': chat.choices[0].message.content
+            }
+            with open(f'cache/{time.time()}.pkl', 'wb') as _openai_cache:
+                pickle.dump(cache_obj, _openai_cache)
+                openai_cache.append(cache_obj)
 
-    if USE_OPENAI_CACHE:
-        cache_obj = {
-            'prompt': chat_history[-1]["content"],
-            'response': chat.choices[0].message.content
-        }
-        with open(f'cache/{time.time()}.pkl', 'wb') as _openai_cache:
-            pickle.dump(cache_obj, _openai_cache)
-            openai_cache.append(cache_obj)
-
-    chat_history.append({
-                    "role": "system",
-                    "content": chat.choices[0].message.content,
-                    })
+        chat_history.append({
+                        "role": "system",
+                        "content": chat.choices[0].message.content,
+                        })
 
     return chat.choices[0].message.content
 

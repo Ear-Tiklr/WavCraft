@@ -5,16 +5,15 @@ import glob
 import pickle
 from openai import OpenAI
 
-client = OpenAI(api_key=api_key,
-api_key='')
-
 from utils.config_loader_json import get_config
 
 config = get_config()
 
+OPENAI_KEY = config.get('api_key', os.environ.get("OPENAI_KEY"))
+client = OpenAI(api_key=OPENAI_KEY)
 
 class FFmpegEngineer:
-    OPENAI_KEY = os.environ.get('OPENAI_KEY')
+
 
     def __init__(self, use_openai_cache = False,):
         self.use_openai_cache = False
@@ -67,15 +66,14 @@ class FFmpegEngineer:
                 )
 
         finally:
-
-        if self.use_openai_cache:
-            cache_obj = {
-                'prompt': prompt,
-                'response': response,
-            }
-            with open(f'cache/{time.time()}.pkl', 'wb') as _openai_cache:
-                pickle.dump(cache_obj, _openai_cache)
-                self.openai_cache.append(cache_obj)
+            if self.use_openai_cache:
+                cache_obj = {
+                    'prompt': prompt,
+                    'response': response,
+                }
+                with open(f'cache/{time.time()}.pkl', 'wb') as _openai_cache:
+                    pickle.dump(cache_obj, _openai_cache)
+                    self.openai_cache.append(cache_obj)
 
         return response
 
