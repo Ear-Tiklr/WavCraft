@@ -7,7 +7,9 @@ export MAX_SCRIPT_LINES=999
 # Start AudioCraft service
 source services/start_audiocraft.sh
 # Start AudioSep service
-source services/start_audiosep.sh
+source services/start_wavcraft_v1.sh
+# start v2
+source services/start_wavcraft_v2.sh
 # Start AudioSR service
 source services/start_audiosr.sh
 # Start AudioLDM service

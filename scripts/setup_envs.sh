@@ -23,7 +23,7 @@ create_env() {
 }
 
 # Paths to the YAML files for environment creation
-create_env "AudioCraft" "venvs/audiocraft.yml"
-create_env "AudioLDM" "venvs/audioldm.yml"
-create_env "AudioSR" "venvs/audiosr.yml"
+#create_env "AudioCraft" "venvs/audiocraft.yml"
+#create_env "AudioLDM" "venvs/audioldm.yml"
+#create_env "AudioSR" "venvs/audiosr.yml"
 create_env "WavCraft" "venvs/wavcraft.yml"
