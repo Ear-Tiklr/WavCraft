@@ -1,0 +1,2 @@
+wget https://huggingface.co/spaces/Audio-AGI/AudioSep/resolve/main/checkpoint/audiosep_base_4M_steps.ckpt
+wget https://huggingface.co/spaces/Audio-AGI/AudioSep/raw/main/checkpoint/music_speech_audioset_epoch_15_esc_89.98.pt

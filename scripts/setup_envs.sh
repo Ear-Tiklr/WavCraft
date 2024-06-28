@@ -27,3 +27,4 @@ create_env() {
 #create_env "AudioLDM" "venvs/audioldm.yml"
 #create_env "AudioSR" "venvs/audiosr.yml"
 create_env "WavCraft" "venvs/wavcraft.yml"
+create_env "AudioSep" "venvs/audiosep.yml"
