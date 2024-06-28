@@ -14,7 +14,7 @@ from glob import glob
 from wavcraft.mistral_api import ChatMistral
 import wavcraft.utils as utils
 
-from utils.config_loader_json import get_config
+from config_utils.config_loader_json import get_config
 
 config = get_config()
 

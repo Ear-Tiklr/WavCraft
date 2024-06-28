@@ -4,7 +4,7 @@ import sys
 
 import wavcraft.utils as utils
 import wavcraft.pipeline as pipeline
-from utils.config_loader_json import get_config
+from config_utils.config_loader_json import get_config
 
 config = get_config()
 

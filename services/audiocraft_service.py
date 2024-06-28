@@ -14,7 +14,7 @@ from wavcraft.utils import fade, get_service_port
 from flask import Flask, request, jsonify
 
 
-from utils.config_loader_json import get_config
+from config_utils.config_loader_json import get_config
 
 config = get_config()
 

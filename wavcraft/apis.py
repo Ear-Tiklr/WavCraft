@@ -10,7 +10,7 @@ from retrying import retry
 from gradio_client import Client
 from audiomentations import AddGaussianSNR, LowPassFilter, HighPassFilter, ApplyImpulseResponse, RoomSimulator
 
-from utils.config_loader_json import get_config
+from config_utils.config_loader_json import get_config
 from wavcraft.utils import get_service_port, get_service_url, get_path_from_target_dir, generate_random_series
  
 

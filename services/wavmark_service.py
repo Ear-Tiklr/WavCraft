@@ -56,7 +56,7 @@ def audio_watermark():
     signal, sr = soundfile.read(wav_path)
     assert sr == sample_rate, "WavMark use 16kHz audio only!"
     # Otherwise, you can use the following function to convert the host audio to single-channel 16kHz format:
-    # from wavmark.utils import file_reader
+    # from wavmark.config_utils import file_reader
     # signal = file_reader.read_as_single_channel(wav_path, aim_sr=sample_rate)
 
     try:
