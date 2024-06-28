@@ -109,7 +109,7 @@ dependencies:
     - einops==0.6.1
     - encodec==0.1.1
     - exceptiongroup==1.1.2
-    - fastapi>=0.75.2,<0.99.0
+    - fastapi==0.100.0
     - ffmpy==0.3.0
     - filelock==3.12.2
     - flashy==0.0.2
@@ -220,8 +220,8 @@ dependencies:
     - threadpoolctl==3.2.0
     - tokenizers==0.13.3
     - toolz==0.12.0
-    - torch
-    - torchaudio
+    - torch==2.0.1
+    - torchaudio==2.0.2
     - torchlibrosa==0.1.0
     - torchmetrics==1.0.1
     - torchvision==0.15.2
@@ -245,5 +245,21 @@ dependencies:
     - xformers==0.0.20
     - yarl==1.9.2
     - zipp==3.16.2
+    - --extra-index-url https://download.pytorch.org/whl/cu118
+    - git+https://github.com/huggingface/diffusers.git
+    - torch==2.0.1+cu118; sys_platform != 'darwin'
+    - torch==2.0.1; sys_platform == 'darwin'
+    - torchvision==0.15.2+cu118; sys_platform != 'darwin'
+    - torchvision==0.15.2; sys_platform == 'darwin'
+    - torchaudio==2.0.2+cu118; sys_platform != 'darwin'
+    - torchaudio==2.0.2; sys_platform == 'darwin'
+    - huggingface_hub
+    - transformers==4.30.2
+    - gradio
+    - soundfile
+    - progressbar
+    - librosa
+    - audiosr
+    - unidecode
 prefix: /root/.conda/envs/WavCraft
 
