@@ -4,6 +4,7 @@ channels:
   - nvidia
   - defaults
 dependencies:
+  - python=3.9
   - _libgcc_mutex=0.1=main
   - _openmp_mutex=5.1=1_gnu
   - backcall=0.2.0=pyhd3eb1b0_0
@@ -131,7 +132,6 @@ dependencies:
   - pycparser=2.21=pyhd3eb1b0_0
   - pyopenssl=22.0.0=pyhd3eb1b0_0
   - pysocks=1.7.1=py310h06a4308_0
-  - python=3.10.9=h7a1cb2a_0
   - python-dateutil=2.8.2=pyhd3eb1b0_0
   - pytorch=1.13.1=py3.10_cuda11.6_cudnn8.3.2_0
   - pytorch-cuda=11.6=h867d48c_1
