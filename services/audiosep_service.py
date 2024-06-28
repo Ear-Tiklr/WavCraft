@@ -72,7 +72,7 @@ def inference(model, audio_file, text, output_file, device='cuda', use_chunk=Fal
 
 import sys
 sys.path.append("ext/AudioSep")
-from pipeline import build_audiosep
+from ss_pipeline import build_audiosep
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 ss = build_audiosep(
       config_yaml='ext/AudioSep/config/audiosep_base.yaml', 
