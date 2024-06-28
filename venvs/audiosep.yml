@@ -132,6 +132,7 @@ dependencies:
   - pycparser=2.21=pyhd3eb1b0_0
   - pyopenssl=22.0.0=pyhd3eb1b0_0
   - pysocks=1.7.1=py310h06a4308_0
+  - python=3.10.9=h7a1cb2a_0
   - python-dateutil=2.8.2=pyhd3eb1b0_0
   - pytorch=1.13.1=py3.10_cuda11.6_cudnn8.3.2_0
   - pytorch-cuda=11.6=h867d48c_1
@@ -320,8 +321,8 @@ dependencies:
       - websocket-client==1.5.1
       - websockets==11.0.1
       - werkzeug>=2.3.3
-      - wget~=3.2
-      - wsproto~=1.2.0
-      - yarl~=1.8.2
-      - zenodo-get~=1.3.4
-      - zsvision~=0.7.8
+      - wget==3.2
+      - wsproto==1.2.0
+      - yarl==1.8.2
+      - zenodo-get==1.3.4
+      - zsvision==0.7.8
