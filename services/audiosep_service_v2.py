@@ -34,41 +34,6 @@ logging.getLogger('').addHandler(file_handler)
 """
 Initalize the AudioSep model here
 """
-# def inference(model, audio_file, text, output_file, device='cuda', use_chunk=False):
-#     print(f'Separate audio from [{audio_file}] with textual query [{text}]')
-#     mixture, fs = librosa.load(audio_file, sr=32000, mono=True)
-#     with torch.no_grad():
-#         text = [text]
-#
-#         conditions = model.query_encoder.get_query_embed(
-#             modality='text',
-#             text=text,
-#             device=device
-#         )
-#
-#         input_dict = {
-#             "mixture": torch.Tensor(mixture)[None, None, :].to(device),
-#             "condition": conditions,
-#         }
-#
-#         if use_chunk:
-#             foreground = model.ss_model.chunk_inference(input_dict)
-#             foreground = np.squeeze(foreground)
-#         else:
-#             foreground = model.ss_model(input_dict)["waveform"]
-#             foreground = foreground.squeeze(0).squeeze(0).data.cpu().numpy()
-#
-#         background = mixture - foreground
-#
-#         filedir, filename = os.path.split(output_file)
-#         fg_filepath = os.path.join(filedir, "fg_"+filename)
-#         bg_filepath = os.path.join(filedir, "bg_"+filename)
-#
-#         write(fg_filepath, 32000, np.round(foreground * 32767).astype(np.int16))
-#         print(f'Write separated audio to [{fg_filepath}]')
-#
-#         write(bg_filepath, 32000, np.round(background * 32767).astype(np.int16))
-#         print(f'Write the background audio to [{bg_filepath}]')
 
 import sys
 sys.path.append("ext/AudioSep")
